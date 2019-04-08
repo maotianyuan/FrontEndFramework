@@ -11,7 +11,7 @@
 
 
 ### 一、安装Node.js工具
-```
+```js
 1： sudo apt-get update                                                                     // 更新
 2： sudo apt-get install git vim openssl build-essential lib ssh-dev wget curl              // 添加
 3： curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash    // 添加nvm
@@ -143,7 +143,7 @@ server {
 
 ### 五、pm2 打包
 - pm2 配置文件
-```
+```json
 {
   "apps":[{
      "name":"nuxt",                         // pm2 list 名称
@@ -192,7 +192,7 @@ ln -s ~/install/node-v10.9.0-linux-x64/bin/npm   /usr/bin/npm       // [软连�
 #### 六、本地登录服务器记住密码
 
 找到本机ssh下面id_rsa.pub  于需要相链接的远程服务器 进行记住密码操作，按照提示输入服务器密码
-```
+```js
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@x.x.x.x                               //  mac通用 x.x.x.x 你的服务器ip
 ssh-copy-id -i /c/Users/yourname/.ssh/id_rsa.pub root@x.x.x.x               //  window 通用 将本地
 ssh-copy-id -i /c/Users/yourname/.ssh/id_rsa.pub -p 9777 root@x.x.x.x       //  x.x.x.x 你的服务器ip，服务器port 为9777情况 默认22 可省
