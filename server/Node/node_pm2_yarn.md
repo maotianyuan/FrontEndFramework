@@ -39,29 +39,29 @@
 ```
 // 方式二
 ```
-1.  下载node包
+1:  下载node包
     wget https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz     // 安装不同的版本  v8.11.4
 
-2.  解压缩哦
+2:  解压缩哦
     tar xvf node-v7.2.1-linux-x64.tar.xz  tar xvf node-v8.11.4-linux-x64.tar.xz    // 解压缩
     ls -ll node-v7.2.1-linux-x64                                                   // 查看
 
-3.  移动
+3:  移动
     mkdir -p /opt/node/                            // 创建目录           
     mv ~/node-v8.11.4-linux-x64/* /opt/node/       // 移动解压缩的node文件
     cd /opt/node/                                  // 查看
     ls -ll
 
-4. 配置全局可以访问的软连接
+4: 配置全局可以访问的软连接
     ln -s /opt/node/bin/node /usr/local/bin/node
     ln -s /opt/node/bin/npm /usr/local/bin/npm
     ln -s /opt/node/bin/cnpm /usr/local/bin/cnpm
 
-5. 可在任何路径测试
+5: 可在任何路径测试
     node -v
     npm -v
 
-6. linux安装环境变量
+6: linux安装环境变量
 
 export NODE_HOME=/opt/node
 export PATH=$PATH:$NODE_HOME/bin
@@ -189,7 +189,7 @@ ln -s ~/install/node-v10.9.0-linux-x64/bin/npm   /usr/bin/npm       // [软连�
 
 ```
 
-#### 本地登录服务器记住密码
+#### 六、本地登录服务器记住密码
 
 找到本机ssh下面id_rsa.pub  于需要相链接的远程服务器 进行记住密码操作，按照提示输入服务器密码
 ```
