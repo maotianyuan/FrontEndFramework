@@ -3,6 +3,8 @@
 ### react
 
 ### server
+- Lighttpd
+  - [lighttpd手动上线步骤](/server/Lighttpd/lighttpd手动上线步骤.md)
 - Linux
   - [基于linux的TCP网络聊天室设计与实现](/server/Linux/基于linux的TCP网络聊天室设计与实现.md)
   - [Linux高级编程基础知识点](/server/Linux/Linux高级编程基础知识点.md)
