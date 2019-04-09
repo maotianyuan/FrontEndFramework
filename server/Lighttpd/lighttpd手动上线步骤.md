@@ -1,4 +1,4 @@
-### lighttpd手动上线步骤
+### Lighttpd手动上线步骤
 
 ```shell
 # 1.从git上拉去代码
@@ -16,7 +16,7 @@ scp -r root@x.x.x.x:/data/www/lighttpd/project.zip ./
 # 执行完命令需要输入密码 Password
 
 ```
-test.sh
+test.sh 示例
 ```shell
 #!/bin/bash
 
