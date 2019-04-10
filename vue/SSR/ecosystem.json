@@ -1,0 +1,68 @@
+{
+    "apps": [{
+        "name": "nlp",
+        "script": "start.js",
+        "env": {
+            "COMMON_VARIABLE": "true"
+        },
+        "env_production": {
+            "NODE_ENV": "production"
+        },
+        "env_test": {
+            "NODE_ENV": "production",
+            "API": "test"
+        },
+        "env_online": {
+            "NODE_ENV": "production",
+            "API": "online"
+        },
+        "env_ailer": {
+            "NODE_ENV": "production",
+            "API": "online"
+        }
+    }],
+    "deploy": {
+        "test": {
+            "user": "root",
+            "host": ["x.x.x.x"],
+            "port": "22",
+            "ref": "origin/dev",
+            "repo": "yours git",
+            "path": "/data/www/node",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "post-deploy": "git pull origin dev && yarn install && yarn run build && pm2 startOrRestart ecosystem.json --env test",
+            "env": {
+                "NODE_ENV": "production",
+                "API": "test"
+            }
+        },
+        "online": {
+            "user": "root",
+            "host": ["x.x.x.x"],
+            "port": "9777",
+            "ref": "origin/master",
+            "path": "/data/www/node",
+            "repo": "yours git",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "post-deploy": "git pull && yarn install && yarn run build && pm2 startOrRestart ecosystem.json --env online",
+            "env": {
+                "NODE_ENV": "production",
+                "API": "online"
+            }
+        },
+        "ailer": {
+            "user": "root",
+            "host": ["119.23.58.139"],
+            "port": "22",
+            "ref": "origin/master",
+            "path": "/data/www/node",
+            "repo": "yours git",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "post-deploy": "git pull && yarn install && yarn run build && pm2 startOrRestart ecosystem.json --env online",
+            "env": {
+                "NODE_ENV": "production",
+                "API": "online"
+            }
+        }
+    }
+}
