@@ -177,13 +177,17 @@ export default {
         content: '描述信息'
       }]
     }
-  }
+  },
   // 路由参数校验
   validate({
     params
   }) {
     return /^\d+$/.test(params.reportId)
   },
+  async asyncData ({ params }) {
+    let { data } = await axios.get(`https://my-api/posts/${params.id}`)
+    return { title: data.title }
+  }
   
 }
 ```
@@ -263,3 +267,7 @@ async function start() {
 }
 start()
 ```
+
+
+>分享
+[Nuxt官网](https://zh.nuxtjs.org/guide/installation/)
