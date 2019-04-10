@@ -16,6 +16,8 @@
 - [网络原理](/server/网络原理.md)
 
 ### vue
+- SSR
+  - [Nuxt部分配置文件](/vue/SSR/Nuxt部分配置文件.md)
 - 源码
   - [1_Vue.js响应式原理](/vue/源码/1_Vue.js响应式原理.md)
   - [2_依赖收集](/vue/源码/2_依赖收集.md)
