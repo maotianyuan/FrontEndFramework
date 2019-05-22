@@ -197,3 +197,4 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub root@x.x.x.x                               //  
 ssh-copy-id -i /c/Users/yourname/.ssh/id_rsa.pub root@x.x.x.x               //  window 通用 将本地
 ssh-copy-id -i /c/Users/yourname/.ssh/id_rsa.pub -p 9777 root@x.x.x.x       //  x.x.x.x 你的服务器ip，服务器port 为9777情况 默认22 可省
 ```
+
