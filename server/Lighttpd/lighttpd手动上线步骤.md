@@ -1,6 +1,13 @@
 ### Lighttpd手动上线步骤
 
 ```shell
+vim etc/lighttpd/lighttpd.conf
+service lighttpd status
+service lighttpd restart
+
+```
+
+```shell
 # 1.从git上拉去代码
 git clone git@x.x.x.x:qicheplatform/project.git [你git地址]
 # 2.添加data-stone到zip,上传到服务器 [rz  选择文件上传到服务器] [sz 选择文件下载到本地]
