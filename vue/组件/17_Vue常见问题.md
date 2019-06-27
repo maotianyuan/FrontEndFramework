@@ -29,7 +29,7 @@
 #### 二、绑定 class 的数组用法
 >可以是固定的值，还有动态值（对象）的混合。
 
-```
+```js
 <template>
   <div :class="classes"></div>
 </template>
