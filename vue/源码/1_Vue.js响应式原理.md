@@ -2,7 +2,7 @@
 >[defineProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
 #### Vue.js响应式原理
 
-```
+```js
 function observe(value, cb) {
     Object.keys(value).forEach((key) => defineReactive(value, key, value[key] , cb))
 }

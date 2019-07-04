@@ -1,0 +1,2 @@
+- 差异化参数提前固化
+- vue mount compile render vnode path createElement dom
