@@ -1,3 +1,15 @@
+### vue技术分享之你可能不知道的7个秘密
+
+### 目录
+- 一、善用watch的immediate属性
+- 二、组件注册，值得借鉴
+- 三、精简vuex的modules引入
+- 四、路由的延迟加载
+- 五、router key组件刷新
+- 六、唯一组件根元素
+- 七、组件包装、事件属性穿透问题
+
+
 ### 一、善用watch的immediate属性
 - bad
 ```js
@@ -35,7 +47,7 @@ export default {
  }
 }
 <BaseInput v-model="searchText" @keydown.enter="search" />
-<BaseButton @click="search"> <BaseIcon name="search"/></BaseButton>
+<BaseButton @click="search" /><BaseIcon name="search"/></BaseButton>
 ```
 
 - good
@@ -67,9 +79,7 @@ requireComponent.keys().forEach(fileName => {
  v-model="searchText"
  @keydown.enter="search"
 />
-<BaseButton @click="search">
- <BaseIcon name="search"/>
-</BaseButton>
+<BaseButton @click="search" /><BaseIcon name="search"/> </BaseButton>
 ```
 
 - good例子
@@ -115,9 +125,9 @@ requireModule.keys().forEach(fileName => {
   fileName.replace(/(\.\/|\.js)/g, '')
  )
  modules[moduleName] = {
-        namespaced: true,
-        ...requireModule(fileName),
-       }
+   namespaced: true,
+   ...requireModule(fileName),
+   }
 })
 export default modules
 ```
