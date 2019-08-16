@@ -116,9 +116,13 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    publicPath: isProd ? 'dist/_nuxt/' : '/dist/_nuxt/',
     build: {
       vendor: ['Cookie', 'axios']
-    }
+    },
+    styleResources: {
+      less:'./assets/css/variables.less' // 全局引入公共变量less文件
+    },
     /*
      ** Run ESLint on save
      */
@@ -268,6 +272,72 @@ async function start() {
 start()
 ```
 
+- plugins
+```js
+import Vue from 'vue'
+import Echarts from 'echarts'
+var BaiduMap = {}
+if (process.browser) {
+  require('echarts/extension/bmap/bmap.js')
+  BaiduMap = require('vue-baidu-map');
+  var {
+    BmlHeatmap
+  } = require('vue-baidu-map')
+  require('echarts-wordcloud')
+}
+
+export default () => {
+  if (process.browser) {
+    Vue.use(BaiduMap.default, {
+      ak: 'yours ak'
+    })
+    Vue.component('bml-heatmap', BmlHeatmap)
+    Vue.prototype.$echarts = Echarts
+  }
+}
+
+```
+
+- 全局组件注册
+```js
+import Vue from 'vue'
+import upperFirst from 'lodash/upperFirst'
+import camelCase from 'lodash/camelCase'
+
+const baseComponents = {
+  install(Vue){
+    const requireComponents = require.context('../components/global', true, /\.(vue|js)/)
+    requireComponents.keys().map(fileName => {
+      const componentConfig = requireComponents(fileName)
+      const componentName = upperFirst(
+        camelCase(fileName.replace(/^\.\//, '').replace(/\.\w+$/, ''))
+      )
+      Vue.component(componentName, componentConfig.default || componentConfig)
+    })
+  }
+}
+Vue.use(baseComponents)
+```
+
+- store模块注册
+```js
+import camelCase from 'lodash/camelCase'
+const requireModule = require.context('.', false, /\.js$/)
+const modules = {}
+requireModule.keys().forEach(fileName => {
+  if (fileName === './index.js') return
+  const componentConfig = requireModule(fileName)
+  const moduleName = camelCase(
+    fileName.replace(/(\.\/|\.js)/g, '')
+  )
+  modules[moduleName] = {
+   namespaced: true,
+   ...componentConfig.default || componentConfig
+  }
+})
+export default modules
+
+```
 
 >分享
 [Nuxt官网](https://zh.nuxtjs.org/guide/installation/)
