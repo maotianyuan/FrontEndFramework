@@ -25,7 +25,7 @@ watch: {
 - good
 ```js
 watch: {
-  searchInputValue:{
+  searchInputValue: {
     handler: 'fetchPostList',
     immediate: true
   }

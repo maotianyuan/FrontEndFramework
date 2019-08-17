@@ -23,6 +23,7 @@ scp -r root@x.x.x.x:/data/www/lighttpd/project.zip ./
 # 执行完命令需要输入密码 Password
 
 ```
+
 test.sh 示例
 ```shell
 #!/bin/bash
@@ -60,6 +61,4 @@ sudo supervisorctl reload
 
 #设置软连接
 #ln -s /disk1/voiceFiles_defined/ /data/www/lighttpd/project/public/storage_defind
-
-
 ```

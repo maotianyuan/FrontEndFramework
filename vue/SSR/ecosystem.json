@@ -52,7 +52,7 @@
         },
         "ailer": {
             "user": "root",
-            "host": ["119.23.58.139"],
+            "host": ["X.X.X.X"],
             "port": "22",
             "ref": "origin/master",
             "path": "/data/www/node",

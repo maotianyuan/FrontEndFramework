@@ -22,7 +22,8 @@
 
 6:  测试启动node服务器
     const http = require('http');
-    const hostname = '127.0.0.1';const port = 3000;
+    const hostname = '127.0.0.1';
+    const port = 3000;
     const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
@@ -142,6 +143,7 @@ server {
 ```
 
 ### 五、pm2 打包
+
 - pm2 配置文件
 ```json
 {
@@ -172,6 +174,81 @@ server {
     }
   }
 }
+```
+
+- pm2示例
+```json
+{
+  "apps": [{
+    "name": "test",
+    "script": "app.js",
+    "env": {
+      "COMMON_VARIABLE": "true",
+    },
+    "env_production": {
+      "NODE_ENV": "production"
+    },
+    "env_test": {
+      "NODE_ENV": "production",
+      "API": "test"
+    },
+    "env_online": {
+      "NODE_ENV": "production",
+      "API": "online"
+    },
+    "env_dianshi": {
+      "NODE_ENV": "production",
+      "API": "dianshi"
+    }
+  }],
+  "deploy": {
+    "test": {
+      "user": "root",
+      "host": ["xx.xx.xx.xx"],
+      "port": "22",
+      "ref": "origin/dev",
+      "repo": "git地址",
+      "path": "/data/www/node",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "post-deploy": "git pull origin dev && yarn install && yarn run build && pm2 startOrRestart ecosystem.json --env test",
+      "env": {
+        "NODE_ENV": "production",
+        "API": "test"
+      }
+    },
+    "online": {
+      "user": "root",
+      "host": ["xx.xx.xx.xx"],
+      "port": "9777",
+      "ref": "origin/master",
+      "path": "/data/www/node",
+      "repo": "git@gitee.com:****/****.git",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "post-deploy": "git pull && yarn install && yarn run build && pm2 startOrRestart ecosystem.json --env online",
+      "env": {
+        "NODE_ENV": "production",
+        "API": "online"
+      }
+    },
+    "dianshi": {
+      "user": "root",
+      "host": ["xx.xx.xx.xx"],
+      "port": "22",
+      "ref": "origin/dev",
+      "repo": "git**git",
+      "path": "/data/www/node",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "post-deploy": "git pull origin dev && yarn install && yarn run build && pm2 startOrRestart ecosystem.json --env dianshi",
+      "env": {
+        "NODE_ENV": "production",
+        "API": "dianshi"
+      }
+    }
+  }
+}
+// "restart": "pm2 startOrRestart ecosystem.json",
+// "test": "pm2 deploy ecosystem.json test",
+// "online": "pm2 deploy ecosystem.json online"
 ```
 
 ```
