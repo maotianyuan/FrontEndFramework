@@ -8,7 +8,7 @@
 1.属性 prop
 >prop定义了有哪些可配置的属性，props 最好用对象的写法，这样可以针对每个属性设置类型、默认值或自定义校验属性的值，这点在组件开发中很重要;
 >inheritAttrs: false 就可以禁用了 id class
-```
+```js
 // 判断参数是否是其中之一
   export default {
     props: {

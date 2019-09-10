@@ -1,6 +1,6 @@
-### vue技术分享之你可能不知道的7个秘密
+# vue技术分享之你可能不知道的7个秘密
 
-### 目录
+## 目录
 - 一、善用watch的immediate属性
 - 二、组件注册，值得借鉴
 - 三、精简vuex的modules引入
@@ -295,3 +295,5 @@ computed: {
 ```
 $attrs包含了父作用域中不作为 prop 被识别 (且获取) 的特性绑定 (class 和 style 除外)。当一个组件没有声明任何 prop 时，这里会包含所有父作用域的绑定，并且可以通过 v-bind="$attrs" 传入内部组件。
 $listeners包含了父作用域中的 (不含 .native 修饰器的) v-on 事件监听器。它可以通过 v-on="$listeners" 传入内部组件。
+
+- [vue技术分享之你可能不知道的7个秘密](https://my.oschina.net/u/3970421/blog/2961743)
