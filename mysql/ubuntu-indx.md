@@ -28,3 +28,5 @@ show global variables like 'port';
 ```
 
 - 配置服务器安全组规则
+- 数据库链接超时 nodejs.ETIMEDOUTError: connect ETIMEDOUT
+- netstat -anpt
