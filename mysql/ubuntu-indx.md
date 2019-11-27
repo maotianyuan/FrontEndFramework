@@ -30,3 +30,11 @@ show global variables like 'port';
 - 配置服务器安全组规则
 - 数据库链接超时 nodejs.ETIMEDOUTError: connect ETIMEDOUT
 - netstat -anpt
+
+- 修改数据库密码
+```md
+方法一：
+在mysql系统外，使用mysqladmin
+# mysqladmin -u root -p password "test123"
+Enter password: 【输入原来的密码】
+```
