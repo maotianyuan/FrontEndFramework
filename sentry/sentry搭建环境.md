@@ -170,3 +170,5 @@ FAIL: Expected minimum RAM available to Docker to be 2400 MB but found 2000 MB
 [https://blog.csdn.net/ros_donggua/article/details/81024658]
 [https://www.cnblogs.com/Shadow3627/p/10767023.html]
 [https://juejin.im/post/5b55c33ae51d45198f5c7a91]
+[https://github.com/getsentry/onpremise]
+[https://learnku.com/articles/9405/the-deployment-of-sentry-into-the-production-environment]
