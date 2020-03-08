@@ -2,17 +2,14 @@ export default {
   functional:true,
   render(h,{parent,data}){
       let route = parent.$route
-      
       let depth = 0;
-      console.log('parent', parent)
       while(parent){
-          if(parent.$vnode && parent.$vnode.data.routerView =='abc'){
-            console.log(1)
+          if(parent.$vnode && parent.$vnode.data.routerView){
               depth++;
           }
           parent = parent.$parent;
       }
-      data.routerView = 'abc';
+      data.routerView = true;
       let record = route.matched[depth];   // [0,1]
       console.log(depth, record)
       if(!record){
