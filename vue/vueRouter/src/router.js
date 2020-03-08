@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import Router from './vue-router'
 import Login from './views/login.vue'
 import List from './views/list/list.vue'
 import ListA from './views/list/a.vue'
