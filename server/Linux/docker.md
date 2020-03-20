@@ -16,4 +16,50 @@
 - ``$ docker rm -f <容器 ID>`` 删除容器
 - ``$ docker rmi <容器 ID>`` 删除镜像
 - ``$ docker exec -it <容器 ID> /bin/bash`` 进入容器
+- ``$ docker exec -it ec66aa43edf6 /bin/bash`` 进入容器
 - ``$ docker cp xxx <容器 ID>:<path>`` 复制xxx文件至容器内path路径下
+
+```bash
+image: node
+
+stages:
+  - install
+  - build
+  - zip
+  - deploy
+
+cache:
+    paths:
+        - node_modules/
+        - dist/
+        - front-end-caiwu.tar
+
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y ) '
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY_DEV")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+install:
+  stage: install
+  script:
+    - npm install -g cnpm --registry=https://registry.npm.taobao.org
+    - cnpm install
+
+build:
+  stage: build
+  script:
+    - npm run build
+
+zip:
+  stage: zip
+  script:
+   - tar -czvf front-end-caiwu.tar ./dist
+
+deploy:
+  stage: deploy
+  script:
+   - scp ./front-end-caiwu.tar root@119.23.58.139:/data
+
+```
