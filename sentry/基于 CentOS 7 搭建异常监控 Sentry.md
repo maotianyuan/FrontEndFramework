@@ -159,7 +159,10 @@ yum install git
 ```shell
 docker-compose up -d
 ```
-
+5. 停止
+```shell
+docker-compose down
+```
 # 邮箱配置
 正常情况下通过第一次 IP:9000 访问的时候，界面会有提示让输入邮箱配置信息，写正确的话可以，就可以登陆直接通过这个路由 [http://你的服务器IP:9000/manage/status/mail/](http://你的服务器IP:9000/manage/status/mail/) 看到邮箱的配置，点击下面的 Test 进行测试是否配置成功
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/424608/1581158079799-47d895ab-e7cc-43e3-bfe0-39713a6540a9.png#align=left&display=inline&height=685&name=image.png&originHeight=1370&originWidth=1962&size=178127&status=done&style=none&width=981)

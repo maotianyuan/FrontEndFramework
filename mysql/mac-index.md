@@ -41,4 +41,3 @@ DROP TABLE table_name;
 ALTER user 'root'@'localhost' IDENTIFIED BY 'password@#!';
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password@#!'; 解决 node mysql 报错问题 [node-mysql](https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server#)
 
-

@@ -38,3 +38,8 @@ show global variables like 'port';
 # mysqladmin -u root -p password "test123"
 Enter password: 【输入原来的密码】
 ```
+
+https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm
+
+
+yum install mysql-server
