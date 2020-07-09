@@ -19,5 +19,7 @@ e.on("newListener", (type) => {
 });
 
 e.on("myEvent", handler1);
-e.on("myEvent", handler1); // 后面的2个 * 锕一共的数量 = 6
-e.on("myEvent", handler1); // 后面的3个 * 4一共的数量 = 12
+
+// e.on("myEvent1", handler1);
+// e.on("myEvent", handler1); // 后面的2个 * 锕一共的数量 = 6
+// e.on("myEvent", handler1); // 后面的3个 * 4一共的数量 = 12
