@@ -1,16 +1,16 @@
-## node pm2 yarn 安装配置 
+## node pm2 yarn 安装配置
 
 ### 目录
-- 一、安装Node.js工具
-- 二、安装Vue/Yarn/PM2
-- 三、nginx端口代理与域名指向
-- 四、配置git 
+
+- 一、安装 Node.js 工具
+- 二、安装 Vue/Yarn/PM2
+- 三、nginx 端口代理与域名指向
+- 四、配置 git
 - 五、pm2 打包
 - 六、本地登录服务器记住密码
 
+### 一、安装 Node.js 工具
 
-
-### 一、安装Node.js工具
 ```js
 1： sudo apt-get update                                                                     // 更新
 2： sudo apt-get install git vim openssl build-essential lib ssh-dev wget curl              // 添加
@@ -29,7 +29,7 @@
     res.setHeader('Content-Type', 'text/plain');
     res.end('Hello World\n');});
     server.listen(port, hostname, () => {console.log(`Server running at http://${hostname}:${port}/`);});
-   
+
 7:  node server.js
 8:  查看启动端口号
     netstat -tunlp
@@ -38,7 +38,9 @@
 9:  curl http://127.0.0.1:3000  // 测试查看访问
 
 ```
+
 // 方式二
+
 ```
 1:  下载node包
     wget https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz     // 安装不同的版本  v8.11.4
@@ -48,7 +50,7 @@
     ls -ll node-v7.2.1-linux-x64                                                   // 查看
 
 3:  移动
-    mkdir -p /opt/node/                            // 创建目录           
+    mkdir -p /opt/node/                            // 创建目录
     mv ~/node-v8.11.4-linux-x64/* /opt/node/       // 移动解压缩的node文件
     cd /opt/node/                                  // 查看
     ls -ll
@@ -69,25 +71,30 @@ export PATH=$PATH:$NODE_HOME/bin
 export NODE_PATH=$NODE_HOME/lib/node_modules
 
 ```
-### 二、安装Vue/Yarn/PM2
-- 安装Yarn [yarn网站](https://yarnpkg.com/en/docs/install#debian-stable)
+
+### 二、安装 Vue/Yarn/PM2
+
+- 安装 Yarn [yarn 网站](https://yarnpkg.com/en/docs/install#debian-stable)
+
 ```
 1: 官网 yarnpkg.com 找到对应系统安装命令    例如下
-    curl -sShttps://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -                                   // Ubuntu 
+    curl -sShttps://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -                                   // Ubuntu
     curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo     // centOS
 
 2: 安装
    sudo apt-get update && sudo apt-get install yarn      // [Ubuntu]
    sudo yum install yarn                                 // [centOS]
 
-3: 设置淘宝  
+3: 设置淘宝
    sudo apt remove cmdtest
    yarn config set registry https://registry.npm.taobao.org
 
-4: npm install vue-cli pm2 -g    
+4: npm install vue-cli pm2 -g
 
 ```
-- pm2简单语法
+
+- pm2 简单语法
+
 ```
 pm2 start server.js
 pm2 list        列表
@@ -99,7 +106,8 @@ pm2 delete server
 pm2 startup centos
 ```
 
-### 三、nginx端口代理与域名指向
+### 三、nginx 端口代理与域名指向
+
 ```
 1: sudo service apache2 stop
 2: sudo apt-get remove apache
@@ -112,8 +120,9 @@ pm2 startup centos
    server_tokens off        // vim 中修改:版本号不输出 nginx版本号
 ```
 
-在cd /etc/nginx/conf.d中创建 .conf结尾的文件 
+在 cd /etc/nginx/conf.d 中创建 .conf 结尾的文件
 简易例子如下：
+
 ```
 upstream myupstream {
   server 127.0.0.1:3000;       # 具体代理的端口3000，根据据自身本地服务监听的端口而定
@@ -131,12 +140,13 @@ server {
     proxy_set_header X-Nginx-Proxy true;
 
     proxy_pass http://myupstream;                       # 假域名上的所有请求都反向代理到本地node服务上
-    proxy_redirect off;                                         
+    proxy_redirect off;
   }
 }
 ```
 
-### 四、配置git 
+### 四、配置 git
+
 ```
 1: ssh-keygen -t rsa -b 4096 -C 'your email'
 2: cat ~/.ssh/id_rsa.pub
@@ -145,62 +155,67 @@ server {
 ### 五、pm2 打包
 
 - pm2 配置文件
+
 ```json
 {
-  "apps":[{
-     "name":"nuxt",                         // pm2 list 名称
-     "script":"server.js",                  // 启动服务的文件
-     "env":{
-       "COMMON_VERIABLE":"true"
-     },
-     "env_production":{
-       "NODE_ENV":"production"
-     }
+  "apps": [
+    {
+      "name": "nuxt", // pm2 list 名称
+      "script": "server.js", // 启动服务的文件
+      "env": {
+        "COMMON_VERIABLE": "true"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
     }
   ],
-  "deploy":{
-    "production":{
-      "user":"root",
-      "host":["xx.xx.xx.xx"],                     // 服务器 ip
-      "port":"22",
-      "ref":"origin/master",                      // 打包分支
-      "repo":"git@test.git",                      // 输入自己的远程仓库地址
-      "path":"/www/project/",                     // 远程服务器存放项目地址
-      "ssh_options":"StrictHostKeyChecking=no",
-      "pre-deploy-local":"echo 'Deploy Done'",
-      "evn":{
-        "NODE_ENV":"production"
+  "deploy": {
+    "production": {
+      "user": "root",
+      "host": ["xx.xx.xx.xx"], // 服务器 ip
+      "port": "22",
+      "ref": "origin/master", // 打包分支
+      "repo": "git@test.git", // 输入自己的远程仓库地址
+      "path": "/www/project/", // 远程服务器存放项目地址
+      "ssh_options": "StrictHostKeyChecking=no",
+      "pre-deploy-local": "echo 'Deploy Done'",
+      "evn": {
+        "NODE_ENV": "production"
       }
     }
   }
 }
 ```
 
-- pm2示例
+- pm2 示例
+
 ```json
 {
-  "apps": [{
-    "name": "test",
-    "script": "app.js",
-    "env": {
-      "COMMON_VARIABLE": "true",
-    },
-    "env_production": {
-      "NODE_ENV": "production"
-    },
-    "env_test": {
-      "NODE_ENV": "production",
-      "API": "test"
-    },
-    "env_online": {
-      "NODE_ENV": "production",
-      "API": "online"
-    },
-    "env_dianshi": {
-      "NODE_ENV": "production",
-      "API": "dianshi"
+  "apps": [
+    {
+      "name": "test",
+      "script": "app.js",
+      "env": {
+        "COMMON_VARIABLE": "true"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      },
+      "env_test": {
+        "NODE_ENV": "production",
+        "API": "test"
+      },
+      "env_online": {
+        "NODE_ENV": "production",
+        "API": "online"
+      },
+      "env_dianshi": {
+        "NODE_ENV": "production",
+        "API": "dianshi"
+      }
     }
-  }],
+  ],
   "deploy": {
     "test": {
       "user": "root",
@@ -255,9 +270,10 @@ server {
 pm2 deploy ecosystem.json production setup
 pm2 deploy ecosystem.json production
 ```
+
 ```
 可能遇到的问题
-- whereis pm2  // pm2安装所在路径   pm2: /root/.nvm/versions/node/v11.0.0/bin/pm2  
+- whereis pm2  // pm2安装所在路径   pm2: /root/.nvm/versions/node/v11.0.0/bin/pm2
 sudo ln -s /root/.nvm/versions/node/v11.0.0/bin/pm2 /usr/bin/pm2    // 路径以自己服务器为主
 
 - whereis node
@@ -268,10 +284,10 @@ ln -s ~/install/node-v10.9.0-linux-x64/bin/npm   /usr/bin/npm       // [软连�
 
 #### 六、本地登录服务器记住密码
 
-找到本机ssh下面id_rsa.pub  于需要相链接的远程服务器 进行记住密码操作，按照提示输入服务器密码
+找到本机 ssh 下面 id_rsa.pub 于需要相链接的远程服务器 进行记住密码操作，按照提示输入服务器密码
+
 ```js
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@x.x.x.x                               //  mac通用 x.x.x.x 你的服务器ip
 ssh-copy-id -i /c/Users/yourname/.ssh/id_rsa.pub root@x.x.x.x               //  window 通用 将本地
 ssh-copy-id -i /c/Users/yourname/.ssh/id_rsa.pub -p 9777 root@x.x.x.x       //  x.x.x.x 你的服务器ip，服务器port 为9777情况 默认22 可省
 ```
-
