@@ -35,7 +35,7 @@
     netstat -tunlp
     netstat -tunlp |grep 端口号   // 用于查看指定的端口号的进程情况，如查看8000端口的情况，[netstat -tunlp |grep 800]
 
-9:  curl http://127.0.0.1:3000  // 测试查看访问
+9:  curl http://127.0.0.1:10010  // 测试查看访问
 
 ```
 
@@ -127,12 +127,23 @@ pm2 startup centos
 upstream myupstream {
   server 127.0.0.1:3000;       # 具体代理的端口3000，根据据自身本地服务监听的端口而定
 }
+
+upstream fe-handbook {
+  server 127.0.0.1:10010;
+}
+
 server {
   listen 80;
   server_name testxx.xxx.com;   # 配置自己的域名，以testxx.xxx
   location /mystatus {
     stub_status;
   }
+
+  location /fe-handbook {
+      rewrite ^/fe\-handbook/(.*) /$1 break;
+      proxy_pass http://fe-handbook;
+  }
+
   location / {
     proxy_set_header X-Real-Ip $remote_addr;
     proxy_set_header X-Forward-For $proxy_add_x_forwarded_for;
